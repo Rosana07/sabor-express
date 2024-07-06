@@ -1,2 +1,2 @@
 # Alura-Python-basico
-Repositório para exemplos do curso de java básico pela Alura.
+Repositório para exemplos do curso de python básico pela Alura.
