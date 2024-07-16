@@ -35,8 +35,11 @@ def opcao_invalida():
 
 def exibir_subtitulo(texto):
     os.system('cls')
+    linha = '*' * (len(texto))
+    print(linha)
     print(texto)
-    print
+    print(linha)
+    print()
 
 
 def cadastrar_novo_restaurante():
@@ -55,28 +58,36 @@ def listar_restaurantes():
     for restaurante in restaurantes:
         nome_restaurante = restaurante['nome']
         categoria = restaurante['categoria']
-        ativo = restaurante['ativo']
+        ativo = 'ativado' if restaurante['ativo'] else 'desativado'
         print(f'-{nome_restaurante} | {categoria} | {ativo}')
 
     voltar_ao_menu_principal()
 
 
+def exibir_subtitulo(subtitulo):
+    print(f'\n{subtitulo}\n')
+
 def alternar_estado_restaurante():
     exibir_subtitulo('Alterando estado do restaurante')
     nome_restaurante = input('Digite o nome do restaurante que deseja alterar o estado: ')
     restaurante_encontrado = False
-
-    for restaurante in restaurantes:
+    
+    for i, restaurante in enumerate(restaurantes):
         if nome_restaurante == restaurante['nome']:
             restaurante_encontrado = True
-            restaurante['ativo'] = not restaurante['ativo']
-            mensagem = f'O restaurante {nome_restaurante} foi ativado com sucesso' if restaurante ['ativo'] else f'O restaurante {nome_restaurante} foi desativado com sucesso'
+            # Alternar o estado do restaurante
+            restaurantes[i]['ativo'] = not restaurantes[i]['ativo']
+            mensagem = f'O restaurante {nome_restaurante} foi ativado com sucesso' if restaurantes[i]['ativo'] else f'O restaurante {nome_restaurante} foi desativado com sucesso'
             print(mensagem)
+            break  # Interrompe o loop após encontrar o restaurante
+    
     if not restaurante_encontrado:
-        print('O restaurante não foi encontrado')        
-
+        print('O restaurante não foi encontrado.')
 
     voltar_ao_menu_principal()
+
+
+
 
 def escolher_opcao():
     opcao_escolhida = int(input('\nEscolha uma opção: '))
